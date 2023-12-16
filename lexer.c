@@ -146,7 +146,7 @@ char consume(const char** p) {
 }
 
 int match_ws(const char** p, struct Token* tok) {
-    // Build a Token with all consecutive blanks it can find
+
     if ( **p != ' ' &&
          **p != '\t' &&
          **p != '\r' &&
@@ -180,7 +180,7 @@ int match_ws(const char** p, struct Token* tok) {
 }
 
 int match_template(const char** p, struct Token* tok, char c, enum TokenType type) {
-    // Build a Token with the character in input and advances the stream pointer.
+
     if (**p != c) {
         printf("Bad call to |%c| !!\n", c);
         return 1;
@@ -255,7 +255,7 @@ int match_equal(const char** p, struct Token* tok) {
         return 1;
     }
     char* tmp;
-    // Now use lookahead for one more equal
+
     consume(p);
     if (**p == '=') {
         consume(p);
@@ -367,7 +367,7 @@ int match_div(const char** p, struct Token* tok) {
 }
 
 int match_two_template(const char** p, struct Token* tok, char c1, char c2, enum TokenType type) {
-    // Builds a Token with the two given char (c1, c2) as lexeme. Advances the stream pointer.
+
     if (**p != c1) {
         printf("Bad call to |%c| !\n", c1);
         return 1;
@@ -406,7 +406,7 @@ int match_endline(const char** p, struct Token* tok) {
 }
 
 int match_int(const char** p, struct Token* tok) {
-    // Build Token matching integer number (sequence of digits)
+
     if (**p < 48 || **p > 57) {
         printf("Bad call to int !!\n");
         return 1;
@@ -415,7 +415,7 @@ int match_int(const char** p, struct Token* tok) {
     size_t curr_size = 8;
     char c;
     int totchar = 0;
-    // Handle unique case when the INT is 0
+
     if (**p == '0') {
         c = consume(p);
         if (**p >= 48 && **p <= 57) {
@@ -454,7 +454,7 @@ int match_int(const char** p, struct Token* tok) {
 }
 
 int match_id(const char** p, struct Token* tok) {
-    // Build Token matching all possible variable identifiers, or keyword.
+
     if (**p < 65 || **p > 122 || (**p > 90 && **p < 97)) {
         printf("Bad call to ID !!\n");
         return 1;
@@ -528,7 +528,7 @@ int next_Token(const char** p, struct Token* tok) {
         printf("Reached end of input\n");
         return 0;
     }
-    //printf("NEXT-TOKEN : Current char is |%c|\n", c);fflush(stdout);
+
     if (c == ' ' || c == '\t' || c == '\r' || c == '\n')
         return match_ws(p, tok);
     else if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
@@ -613,13 +613,13 @@ struct TokenList* new_TokenList(struct Token* tok) {
 }
 
 struct TokenList* build_TokenList(const char* fp) {
-    // Prepare memory
+
     char init[16] = {0};
     struct Token* tok = new_Token(init, UNKNOWN);
     struct TokenList* head = NULL;
     struct TokenList* current = head;
     struct TokenList* tail;
-    // Iterate
+
     int i = 0;
     int exit;
     while (*fp != '\0' && (exit = next_Token(&fp, tok)) == 0) {
@@ -645,12 +645,12 @@ struct TokenList* build_TokenList(const char* fp) {
     }
     free_Token(tok);
     if (exit == 0) {
-        // Was able to read the entire file
+
         printf("Tot Tokens = %d\n", i);
         printf("===================================\n");
     }
     else{
-        // Encountered some error
+
         free_TokenList(head);
         head = NULL;
     }
@@ -688,7 +688,7 @@ struct TokenList* strip_WS(struct TokenList* list) {
 
 
 void skip_WS(struct TokenList** list) {
-    // jump ahead of all whitespaces
+
     struct TokenList* current = *list;
     while (current != NULL && current->token->type == WS)
         current = current->next;
