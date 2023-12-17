@@ -1,3 +1,5 @@
+#ifndef PARSER_H
+#define PARSER_H
 #include "lexer.h"
 
 struct ParseTree {
@@ -36,3 +38,5 @@ void free_ParseTree(struct ParseTree* tree);
 int build_ParseTree (struct TokenList* head, struct ParseTree** tree);
 
 int build_ParseTree_FromFile (const char *fileName, struct ParseTree **tree);
+
+#endif // PARSER_H
