@@ -23,7 +23,7 @@ void executeParseTree(struct ParseTree* tree) {
 }
 
 void executePrint(struct ParseTree* expr) {
-    if (expr && expr->data->type == STRING_LITERAL) {
+    if (expr && expr->data->type == StringLiteral) {
         printf("%s\n", expr->data->lexeme);
     } else {
 
