@@ -1697,8 +1697,5 @@ int build_ParseTree_FromFile (const char *fileName, struct ParseTree **tree) {
     free_TokenList(list2);
     free(vec);
     return status;
-}
 
-int main() {
-    return 0;
 }

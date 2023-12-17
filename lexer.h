@@ -1,3 +1,6 @@
+#ifndef LEXER_H
+#define LEXER_H
+
 enum TokenType{
     H,
     C,
@@ -105,3 +108,5 @@ struct TokenList* new_TokenList(struct Token* tok);
 struct TokenList* build_TokenList(const char* fp);
 
 struct TokenList* strip_WS(struct TokenList* list);
+
+#endif
