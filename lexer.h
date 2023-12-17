@@ -36,6 +36,7 @@ enum TokenType{
     UNKNOWN,
     BASIC,
     TERM,
+    PRINT,
     PRED,
     LIST,
     LISTELEMENTS,
